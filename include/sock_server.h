@@ -6,7 +6,7 @@
 /*   By: ykosaka <ykosaka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 13:03:00 by ykosaka           #+#    #+#             */
-/*   Updated: 2023/09/07 17:39:16 by ykosaka          ###   ########.fr       */
+/*   Updated: 2023/09/15 16:29:53 by ykosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "sock_common.h"
 
-int		main(void);
+# define PORT_NUM	50000
+# define NUM_CYCLE	100
 
 #endif
