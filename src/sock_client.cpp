@@ -19,10 +19,10 @@ int	main(int argc, char *argv[]) {
 	int	conn = connect(sockfd, (t_addr *)&addr_to, sizeof(t_addrin)); //ソケット, アドレスポインタ, アドレスサイズ
 	std::clog << conn << std::endl; 
 	if (conn < 0) { //エラー処理
-		std::cout << "Error connect:" << std::strerror(errno); //標準出力
+		std::cerr << "Error connect:" << std::strerror(errno); //標準出力
 		exit(1); //異常終了
 	}
-	std::cout << "\033[33mconnected" << std::endl; //標準出力
+	std::clog << "\033[33mconnected" << std::endl; //標準出力
 
 	//データ送信
 	char	msg[] = "._Hello_World!_"; //送信データ格納用

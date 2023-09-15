@@ -6,7 +6,7 @@
 #    By: ykosaka <ykosaka@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 16:52:37 by ykosaka           #+#    #+#              #
-#    Updated: 2023/09/07 16:32:01 by ykosaka          ###   ########.fr        #
+#    Updated: 2023/09/15 17:29:32 by ykosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ NAME_SV		= server
 NAME_CL		= client
 
 # Enumeration of files
-SRC_SV		= sv_main.cpp
-SRC_CL		= cl_main.cpp
-SRC_COMMON	= 
+SRC_SV		= sock_server.cpp
+SRC_CL		= sock_client.cpp
+SRC_COMMON	= sock_init.cpp ft_stoi.cpp
 
 # Check the platform
 OS				= $(shell uname)

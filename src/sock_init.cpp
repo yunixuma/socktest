@@ -7,7 +7,7 @@ int	sock_init(t_addrin *addr, int port_num) {
 	int sockfd = socket(AF_INET, SOCK_STREAM, 0); //アドレスドメイン, ソケットタイプ, プロトコル
 	if (sockfd < 0) { //エラー処理
 
-		std::clog << "Error socket:" << std::strerror(errno); //標準出力
+		std::clog << COLOR_RED << "Error socket:" << std::strerror(errno); //標準出力
 		exit(1); //異常終了
 	}
 
