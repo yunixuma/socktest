@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+         #
+#    By: ykosaka <ykosaka@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 16:52:37 by ykosaka           #+#    #+#              #
-#    Updated: 2023/09/16 20:15:59 by Yoshihiro K      ###   ########.fr        #
+#    Updated: 2023/09/18 18:37:59 by ykosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ CXX			= c++
 RM			= rm
 
 # Command options (flags)
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -MMD -MP
 DEBUGFLAGS	= -g -ggdb -fsanitize=address \
 			  -fstack-usage -fno-omit-frame-pointer
 INCLUDES	= -I$(INCDIR)
