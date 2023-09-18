@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ykosaka <ykosaka@student.42.fr>            +#+  +:+       +#+         #
+#    By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 16:52:37 by ykosaka           #+#    #+#              #
-#    Updated: 2023/09/15 17:29:32 by ykosaka          ###   ########.fr        #
+#    Updated: 2023/09/16 20:15:59 by Yoshihiro K      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME_CL		= client
 # Enumeration of files
 SRC_SV		= sock_server.cpp
 SRC_CL		= sock_client.cpp
-SRC_COMMON	= sock_init.cpp ft_stoi.cpp
+SRC_COMMON	= sock_init.cpp ft_stoi.cpp sock_debug.cpp
 
 # Check the platform
 OS				= $(shell uname)

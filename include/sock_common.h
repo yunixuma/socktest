@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sock_common.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykosaka <ykosaka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 13:03:00 by ykosaka           #+#    #+#             */
-/*   Updated: 2023/09/15 17:50:42 by ykosaka          ###   ########.fr       */
+/*   Updated: 2023/09/18 04:12:00 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@
 # include <sys/types.h> //ソケットタイプ
 # include <arpa/inet.h> //バイトオーダの変換に利用
 # include <unistd.h> //close()に利用
+# include <stdlib.h> //exit()に利用
 # include <string> //string型
 # include <sstream> //stringstream型
 # include <stdio.h> //sprintf()に利用
+# include <cstring> //strlen()に利用
+# include <cerrno> //errnoに利用
 # include "ft.h"
+# include "sock_debug.hpp"
 
 # define NUM_INVALID	-1
 # define LENGTH_MSG		12

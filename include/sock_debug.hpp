@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sock_server.h                                      :+:      :+:    :+:   */
+/*   sock_debug.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/16 13:03:00 by ykosaka           #+#    #+#             */
-/*   Updated: 2023/09/18 04:11:30 by Yoshihiro K      ###   ########.fr       */
+/*   Created: 2023/05/16 15:04:04 by ykosaka           #+#    #+#             */
+/*   Updated: 2023/09/18 05:04:00 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SOCK_SERVER_H
-# define SOCK_SERVER_H
+#ifndef SOCK_DEBUG_HPP
+# define SOCK_DEBUG_HPP
 
-# include "sock_common.h"
+# include <iostream>
+# include <iomanip>
+# include <sock_common.h>
 
-# define PORT_NUM	50000
-# define NUM_CYCLE	100
+class Debug
+{
+private:
+	Debug();
+	~Debug();
+public:
+	static void	print(const char *name, int val);
+	static void	print(const char *name, struct sockaddr_in *val);
+};
 
 #endif
