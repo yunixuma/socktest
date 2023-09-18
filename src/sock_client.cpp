@@ -22,7 +22,7 @@ static void	sock_connect(int fd_sock, t_addr * addr_to) {
 }
 
 static void	sock_send(int fd_sock) {
-	char	msg[] = "._Hello_World!_";	//送信データ格納用
+	char	msg[] = MSG_HELLO;	//送信データ格納用
 	char	i_str[4];
 	size_t	len_msg = strlen(msg);
 	int i = 0;

@@ -1,6 +1,6 @@
 // https://tora-k.com/2019/08/27/socket-c/#toc2
 
-#include <sock_common.h>
+#include <ft.h>
 
 int	ft_stoi(char *arg) {
 	int	num;

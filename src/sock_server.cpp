@@ -65,10 +65,11 @@ int	main(int argc, char *argv[]) {
 	fd_sock = sock_init(&addr_from, port_num);	//ソケット, アドレスの生成
 	sock_bind(fd_sock, (t_addr *)&addr_from);	//ソケット登録
 	sock_listen(fd_sock);	//受信待ち
-	int	fd_conn = sock_accept(fd_sock);	//接続待ち
 
-	//受信
-	sock_recv(fd_conn);
+	// fcntl(fd_sock, F_SETFL, O_NONBLOCK);
+
+	int	fd_conn = sock_accept(fd_sock);	//接続待ち
+	sock_recv(fd_conn);	//データ受信
 
 	//送信
 	//send(fd_conn, msg, len_msg, 0);	//送信
