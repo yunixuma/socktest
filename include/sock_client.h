@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sock_client.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykosaka <ykosaka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 13:03:00 by ykosaka           #+#    #+#             */
-/*   Updated: 2023/09/18 19:08:30 by ykosaka          ###   ########.fr       */
+/*   Updated: 2023/09/19 16:18:58 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,8 @@
 # define PORT_NUM	50000
 # define NUM_CYCLE	20
 # define MSG_HELLO	"._Hello_World!_"
+
+void	sock_connect(int fd_sock, t_addr * addr_to);
+void	sock_send(int fd_sock);
 
 #endif

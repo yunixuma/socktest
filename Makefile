@@ -6,7 +6,7 @@
 #    By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 16:52:37 by ykosaka           #+#    #+#              #
-#    Updated: 2023/09/19 15:17:48 by Yoshihiro K      ###   ########.fr        #
+#    Updated: 2023/09/19 16:21:01 by Yoshihiro K      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@ NAME_SV		= server
 NAME_CL		= client
 
 # Enumeration of files
-SRC_SV		= sock_server.cpp
-SRC_CL		= sock_client.cpp
+SRC_SV		= sock_server.cpp sock_bind.cpp sock_listen.cpp \
+			  sock_accept.cpp sock_recv.cpp
+SRC_CL		= sock_client.cpp sock_connect.cpp sock_send.cpp
 SRC_COMMON	= sock_setport.cpp sock_init.cpp \
 			  sock_print.cpp sock_debug.cpp ft_stoi.cpp
 

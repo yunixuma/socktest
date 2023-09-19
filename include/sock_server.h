@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sock_server.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykosaka <ykosaka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 13:03:00 by ykosaka           #+#    #+#             */
-/*   Updated: 2023/09/18 18:59:20 by ykosaka          ###   ########.fr       */
+/*   Updated: 2023/09/19 16:23:18 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,10 @@
 
 # define PORT_NUM	50000
 # define NUM_CYCLE	100
+
+void	sock_bind(int fd_sock, t_addr *addr_from);
+void	sock_listen(int fd_sock);
+int		sock_accept(int fd_sock);
+void	sock_recv(int fd_conn);
 
 #endif
