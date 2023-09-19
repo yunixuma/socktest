@@ -6,7 +6,7 @@
 #    By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 16:52:37 by ykosaka           #+#    #+#              #
-#    Updated: 2023/09/19 16:21:01 by Yoshihiro K      ###   ########.fr        #
+#    Updated: 2023/09/19 16:26:56 by Yoshihiro K      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC_COMMON	= sock_setport.cpp sock_init.cpp \
 			  sock_print.cpp sock_debug.cpp ft_stoi.cpp
 
 # Check the platform
-OS				= $(shell uname)
+OS			= $(shell uname)
 
 # Defination of macro constants
 
