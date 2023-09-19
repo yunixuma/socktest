@@ -2,23 +2,14 @@
 
 #include <sock_client.h>
 
-static int	sock_setport(int argc, char *argv[]) {
-	int	port_num = NUM_INVALID;
-	if (argc > 1)
-		port_num = ft_stoi(argv[1]);
-	if (port_num == NUM_INVALID)
-		port_num = PORT_NUM;
-	return (port_num);
-}
-
 static void	sock_connect(int fd_sock, t_addr * addr_to) {
-	int	conn = connect(fd_sock, addr_to, sizeof(t_addr));	//ソケット, アドレスポインタ, アドレスサイズ
-	std::clog << conn << std::endl;
-	if (conn < 0) { //エラー処理
-		std::cerr << "Error connect:" << std::strerror(errno) << std::endl;	//標準エラー出力
+	int	status = connect(fd_sock, addr_to, sizeof(t_addr));	//ソケット, アドレスポインタ, アドレスサイズ
+	Debug::print("sc1\tconnect\tstatus", status);
+	if (status < 0) { //エラー処理
+		Print::error("Error connect: ", errno);
 		exit(1);	//異常終了
 	}
-	std::clog << "\033[33mconnected" << std::endl;	//標準エラー出力
+	Print::error("connected");
 }
 
 static void	sock_send(int fd_sock) {

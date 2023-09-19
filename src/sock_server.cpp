@@ -2,29 +2,22 @@
 
 #include <sock_server.h>
 
-static int	sock_setport(int argc, char *argv[]) {
-	int	port_num = NUM_INVALID;
-	if (argc > 1)
-		port_num = ft_stoi(argv[1]);
-	if (port_num == NUM_INVALID)
-		port_num = PORT_NUM;
-	return (port_num);
-}
-
 static void	sock_bind(int fd_sock, t_addr *addr_from) {
 	//ソケット, アドレスポインタ, アドレスサイズ
-	if(bind(fd_sock, addr_from, sizeof(t_addr)) < 0){	//エラー処理
-		std::cout << "Error bind:" << std::strerror(errno);	//標準出力
+	int	status = bind(fd_sock, addr_from, sizeof(t_addr));
+	Debug::print("sb1\tbind\tstatus", status);
+	if (status < 0) {	//エラー処理
+		Print::error("Error bind: ", errno);
 		exit(1);	//異常終了
 	}
 }
 
 static void	sock_listen(int fd_sock) {
 	//受信待ち
-	int	status_listen = listen(fd_sock, SOMAXCONN);
-	if (status_listen < 0) {	//ソケット, キューの最大長 //エラー処理
-		std::cerr << COLOR_RED << "Error listen: " \
-			<< std::strerror(errno) << std::endl;	//標準エラー出力
+	int	status = listen(fd_sock, SOMAXCONN);
+	Debug::print("sl1\tlisten\tstatus", status);
+	if (status < 0) {	//ソケット, キューの最大長 //エラー処理
+		Print::error("Error listen: ", errno);
 		close(fd_sock);	//ソケットクローズ
 		exit(1);	//異常終了
 	}
@@ -34,15 +27,16 @@ static int	sock_accept(int fd_sock) {
 	t_addrin addr_to;	//接続相手のソケットアドレス
 	socklen_t len_addr = sizeof(t_addrin);	//接続相手のアドレスサイズ
 	Debug::print("sa1\taddr_to", &addr_to);
-	Debug::print("sa41\tlen_addr", len_addr);
+	Debug::print("sa1\tlen_addr", len_addr);
 	//接続待ちソケット, 接続相手のソケットアドレスポインタ, 接続相手のアドレスサイズ
 	int	fd_conn = accept(fd_sock, (sockaddr *)&addr_to, &len_addr);
-	Debug::print("sm41\tfd_conn", fd_conn);
+	Debug::print("sa2\tfd_conn", fd_conn);
 	if (fd_conn < 0) {	//エラー処理
-		std::cerr << COLOR_RED << "Error accept: " << std::strerror(errno) << std::endl;	//標準エラー出力
+		Print::error("Error accept: ", errno);
+		close(fd_sock);	//ソケットクローズ
 		exit(1);	//異常終了
 	}
-	std::clog << COLOR_GREEN << "connected" << std::endl;	//標準エラー出力
+	Print::error("connected");
 	return (fd_conn);
 }
 

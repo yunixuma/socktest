@@ -6,8 +6,7 @@ static int	sock_init_fd(void) {
 	//ソケットの生成
 	int fd_sock = socket(AF_INET, SOCK_STREAM, 0); //アドレスドメイン, ソケットタイプ, プロトコル
 	if (fd_sock < 0) { //エラー処理
-
-		std::clog << COLOR_RED << "Error socket:" << std::strerror(errno); //標準出力
+		Print::error("Error socket: ", errno);
 		exit(1); //異常終了
 	}
 	Debug::print("si2\tfd_sock", fd_sock);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ykosaka <ykosaka@student.42.fr>            +#+  +:+       +#+         #
+#    By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 16:52:37 by ykosaka           #+#    #+#              #
-#    Updated: 2023/09/18 18:37:59 by ykosaka          ###   ########.fr        #
+#    Updated: 2023/09/19 15:17:48 by Yoshihiro K      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ NAME_CL		= client
 # Enumeration of files
 SRC_SV		= sock_server.cpp
 SRC_CL		= sock_client.cpp
-SRC_COMMON	= sock_init.cpp ft_stoi.cpp sock_debug.cpp
+SRC_COMMON	= sock_setport.cpp sock_init.cpp \
+			  sock_print.cpp sock_debug.cpp ft_stoi.cpp
 
 # Check the platform
 OS				= $(shell uname)
@@ -66,9 +67,9 @@ re: fclean $(OBJDIR) all
 
 # Recipes
 $(NAME_SV): $(OBJS_SV)
-	$(CXX) $(CFLAGS) $(OBJS_SV) $(LIBS) -o $(NAME_SV)
+	$(CXX) -D MODE=1 $(CFLAGS) $(OBJS_SV) $(LIBS) -o $(NAME_SV)
 $(NAME_CL): $(OBJS_CL)
-	$(CXX) $(CFLAGS) $(OBJS_CL) $(LIBS) -o $(NAME_CL)
+	$(CXX) -D MODE=0 $(CFLAGS) $(OBJS_CL) $(LIBS) -o $(NAME_CL)
 $(OBJDIR):
 	@mkdir -p $@
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)

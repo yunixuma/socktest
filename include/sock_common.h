@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sock_common.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykosaka <ykosaka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 13:03:00 by ykosaka           #+#    #+#             */
-/*   Updated: 2023/09/18 22:27:22 by ykosaka          ###   ########.fr       */
+/*   Updated: 2023/09/19 14:50:23 by Yoshihiro K      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <cerrno>	//errnoに利用
 
 # include "ft.h"
+# include "sock_print.hpp"
 # include "sock_debug.hpp"
 
 # define NUM_INVALID	-1
@@ -35,6 +36,7 @@ typedef struct sockaddr_in	t_addrin;
 
 int	main(int argc, char *argv[]);
 int	ft_stoi(char *arg);
+int	sock_setport(int argc, char *argv[]);
 int	sock_init(t_addrin *addr, int port_num);
 
 #endif

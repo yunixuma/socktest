@@ -1,6 +1,7 @@
 // https://tora-k.com/2019/08/27/socket-c/#toc2
 
 #include <ft.h>
+#include <sock_debug.hpp>
 
 int	ft_stoi(char *arg) {
 	int	num;
@@ -8,7 +9,7 @@ int	ft_stoi(char *arg) {
 
 	ss << arg;
 	ss >> num;
-	std::cout << num << std::endl;
+	Debug::print("stoi", num);
 	if (!ss.fail() && ss.eof())
 		return (num);
 	else
