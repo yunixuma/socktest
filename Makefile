@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+         #
+#    By: ykosaka <ykosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 16:52:37 by ykosaka           #+#    #+#              #
-#    Updated: 2023/09/19 16:26:56 by Yoshihiro K      ###   ########.fr        #
+#    Updated: 2023/09/22 06:09:12 by ykosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -MMD -MP
 DEBUGFLAGS	= -g -ggdb -fsanitize=address \
 			  -fstack-usage -fno-omit-frame-pointer
 INCLUDES	= -I$(INCDIR)
-RMFLAGS		= -rf
+RMFLAGS		= -r
 
 # ********************* Section for targets and commands ********************* #
 # Phonies
@@ -61,16 +61,16 @@ RMFLAGS		= -rf
 # Mandatory targets
 all: $(LIBS) $(NAME_CL) $(NAME_SV)
 clean:
-	$(RM) $(RMFLAGS) $(OBJDIR)
+	-$(RM) $(RMFLAGS) $(OBJDIR)
 fclean: clean
-	$(RM) $(RMFLAGS) $(NAME_SV) $(NAME_CL)
+	-$(RM) $(RMFLAGS) $(NAME_SV) $(NAME_CL)
 re: fclean $(OBJDIR) all
 
 # Recipes
 $(NAME_SV): $(OBJS_SV)
-	$(CXX) -D MODE=1 $(CFLAGS) $(OBJS_SV) $(LIBS) -o $(NAME_SV)
+	$(CXX) -D MODE=1 $(CXXFLAGS) $(OBJS_SV) $(LIBS) -o $(NAME_SV)
 $(NAME_CL): $(OBJS_CL)
-	$(CXX) -D MODE=0 $(CFLAGS) $(OBJS_CL) $(LIBS) -o $(NAME_CL)
+	$(CXX) -D MODE=0 $(CXXFLAGS) $(OBJS_CL) $(LIBS) -o $(NAME_CL)
 $(OBJDIR):
 	@mkdir -p $@
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)

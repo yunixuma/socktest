@@ -4,9 +4,9 @@
 
 void	sock_listen(int fd_sock) {
 	//受信待ち
-	int	status = listen(fd_sock, SOMAXCONN);
-	Debug::print("sl1\tlisten\tstatus", status);
-	if (status < 0) {	//ソケット, キューの最大長 //エラー処理
+	int	ret_code = listen(fd_sock, SOMAXCONN);
+	Debug::print("sl1\tlisten\tret_code", ret_code);
+	if (ret_code < 0) {	//ソケット, キューの最大長 //エラー処理
 		Print::error("Error listen: ", errno);
 		close(fd_sock);	//ソケットクローズ
 		exit(1);	//異常終了

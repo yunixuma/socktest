@@ -4,9 +4,9 @@
 
 void	sock_bind(int fd_sock, t_addr *addr_from) {
 	//ソケット, アドレスポインタ, アドレスサイズ
-	int	status = bind(fd_sock, addr_from, sizeof(t_addr));
-	Debug::print("sb1\tbind\tstatus", status);
-	if (status < 0) {	//エラー処理
+	int	ret_code = bind(fd_sock, addr_from, sizeof(t_addr));
+	Debug::print("sb1\tbind\tret_code", ret_code);
+	if (ret_code < 0) {	//エラー処理
 		Print::error("Error bind: ", errno);
 		exit(1);	//異常終了
 	}
