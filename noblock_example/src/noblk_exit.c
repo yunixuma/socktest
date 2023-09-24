@@ -6,5 +6,9 @@ int	noblk_exit_error(char *msg, int fd_sock) {
 	perror(msg);
 	if (fd_sock >= 0)
 		close(fd_sock);
+	dprintf(STDERR_FILENO, "errno\t:%d", errno);
+	if (errno)
+		exit(errno);
 	exit(-1);
+	return (errno);
 }

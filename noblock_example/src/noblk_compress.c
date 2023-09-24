@@ -2,7 +2,7 @@
 
 #include <noblk.h>
 
-void	noblk_compress_array(struct pollfd fds[], int *n_fds) {
+void	noblk_compress_array(struct pollfd fds[], int *nfds) {
 	/***********************************************************/
 	/* If the flag_compress_array flag was turned on, we need  */
 	/* to squeeze together the array and decrement the number  */
@@ -10,13 +10,13 @@ void	noblk_compress_array(struct pollfd fds[], int *n_fds) {
 	/* events and revents fields because the events will always*/
 	/* be POLLIN in this case, and revents is output.          */
 	/***********************************************************/
-	for (int i = 0; i < *n_fds; i++) {
+	for (int i = 0; i < *nfds; i++) {
 		if (fds[i].fd == -1) {
-			for(int j = i; j < *n_fds; j++) {
+			for(int j = i; j < *nfds; j++) {
 				fds[j].fd = fds[j + 1].fd;
 			}
 			i--;
-			(*n_fds)--;
+			(*nfds)--;
 		}
 	}
 }

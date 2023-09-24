@@ -6,7 +6,7 @@
 /*   By: ykosaka <ykosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 13:03:00 by ykosaka           #+#    #+#             */
-/*   Updated: 2023/09/22 13:48:07 by ykosaka          ###   ########.fr       */
+/*   Updated: 2023/09/25 03:45:20 by ykosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ int		noblk_ioctl(int fd_sock, int *on);
 int		noblk_bind(int fd_sock);
 int		noblk_listen(int fd_sock);
 void	noblk_init_pollfd(struct pollfd fds[], int fd_sock);
-int		noblk_poll(struct pollfd fds[], int n_fds);
-int		noblk_sequential(struct pollfd *fds, int *n_fds, int fd_sock);
-bool	noblk_accept(struct pollfd fds[], int *n_fds, int fd_sock);
+int		noblk_poll(struct pollfd fds[], int nfds);
+int		noblk_sequential(struct pollfd *fds, int *nfds, int fd_sock, int *on);
+bool	noblk_accept(struct pollfd fds[], int *nfds, int fd_sock, int *on);
 bool	noblk_comm(struct pollfd *pd);
-void	noblk_compress_array(struct pollfd fds[], int *n_fds);
+void	noblk_compress_array(struct pollfd fds[], int *nfds);
 int		noblk_exit_error(char *msg, int fd_sock);
-void	noblk_clean(struct pollfd fds[], int n_fds);
+void	noblk_clean(struct pollfd fds[], int nfds);
 
 #endif

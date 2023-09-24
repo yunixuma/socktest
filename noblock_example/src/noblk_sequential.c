@@ -2,13 +2,13 @@
 
 #include <noblk.h>
 
-int noblk_sequential(struct pollfd *fds, int *n_fds, int fd_sock) {
+int noblk_sequential(struct pollfd *fds, int *nfds, int fd_sock, int *on) {
 	int	flag = 0x0;
 	/***********************************************************/
 	/* One or more descriptors are readable.  Need to          */
 	/* determine which ones they are.                          */
 	/***********************************************************/
-	int	current_size = *n_fds;
+	int	current_size = *nfds;
 	for (int i = 0; i < current_size; i++) {
 		/*********************************************************/
 		/* Loop through to find the descriptors that returned    */
@@ -16,7 +16,7 @@ int noblk_sequential(struct pollfd *fds, int *n_fds, int fd_sock) {
 		/* or the active connection.                             */
 		/*********************************************************/
 		if(fds[i].revents == 0)
-			continue;
+			continue ;
 
 		/*********************************************************/
 		/* If revents is not POLLIN, it's an unexpected result,  */
@@ -31,7 +31,7 @@ int noblk_sequential(struct pollfd *fds, int *n_fds, int fd_sock) {
 			/* Listening descriptor is readable.                   */
 			/*******************************************************/
 			printf("  Listening socket is readable\n");
-			flag |= noblk_accept(fds, n_fds, fd_sock) * FLAG_END;
+			flag |= noblk_accept(fds, nfds, fd_sock, on) * FLAG_END;
 		}
 
 		/*********************************************************/

@@ -6,6 +6,7 @@ int	noblk_listen(int fd_sock) {
 	/*************************************************************/
 	/* Set the listen back log                                   */
 	/*************************************************************/
-	int	ret_code = listen(fd_sock, 32);
+//	int	ret_code = listen(fd_sock, 32);
+	int	ret_code = listen(fd_sock, FDS_POLL - 1);
 	return (ret_code);
 }

@@ -2,7 +2,7 @@
 
 #include <noblk.h>
 
-bool	noblk_accept(struct pollfd fds[], int *n_fds, int fd_sock) {
+bool	noblk_accept(struct pollfd fds[], int *nfds, int fd_sock, int *on) {
 	int	new_sd = 0;
 	/*******************************************************/
 	/* Accept all incoming connections that are            */
@@ -29,14 +29,18 @@ bool	noblk_accept(struct pollfd fds[], int *n_fds, int fd_sock) {
 			break ;
 		}
 
+		if (noblk_ioctl(fd_sock, on) < 0)
+			noblk_exit_error("ioctl() failed", fd_sock);
+
+
 		/*****************************************************/
 		/* Add the new incoming connection to the            */
 		/* pollfd structure                                  */
 		/*****************************************************/
 		printf("  New incoming connection - %d\n", new_sd);
-		fds[*n_fds].fd = new_sd;
-		fds[*n_fds].events = POLLIN;
-		(*n_fds)++;
+		fds[*nfds].fd = new_sd;
+		fds[*nfds].events = POLLIN;
+		(*nfds)++;
 
 		/*****************************************************/
 		/* Loop back up and accept another incoming          */

@@ -2,7 +2,7 @@
 
 #include <noblk.h>
 
-int	noblk_poll(struct pollfd fds[], int n_fds) {
+int	noblk_poll(struct pollfd fds[], int nfds) {
 	/*************************************************************/
 	/* Initialize the timeout to 3 minutes. If no                */
 	/* activity after 3 minutes this program will end.           */
@@ -13,7 +13,7 @@ int	noblk_poll(struct pollfd fds[], int n_fds) {
 	/* Call poll() and wait 3 minutes for it to complete.      */
 	/***********************************************************/
 	printf("Waiting on poll()...\n");
-	int	ret_code = poll(fds, n_fds, TIMEOUT);
+	int	ret_code = poll(fds, nfds, TIMEOUT);
 
 	/***********************************************************/
 	/* Check to see if the poll call failed.                   */

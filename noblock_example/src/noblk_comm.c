@@ -28,7 +28,7 @@ static bool	noblk_comm_recv(struct pollfd *pd, char buffer[], ssize_t *len) {
 	/*****************************************************/
 	if (*len == 0)
 	{
-		printf("  Connection closed\n");
+		printf("  Connection closed by the client\n");
 		return (true);
 	}
 
@@ -36,7 +36,7 @@ static bool	noblk_comm_recv(struct pollfd *pd, char buffer[], ssize_t *len) {
 	/* Data was received                                 */
 	/*****************************************************/
 	if (*len > 0)
-		printf("  %zd bytes received\n", *len);
+		printf("  fd\t%d\t%zd bytes received\n", pd->fd, *len);
 	return (false);
 }
 
