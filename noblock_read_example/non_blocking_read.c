@@ -1,3 +1,6 @@
+// Cited from https://qiita.com/gu-chi/items/1fbc8c05b1ef5a3ac5aa
+//  on 2024-04-05
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>

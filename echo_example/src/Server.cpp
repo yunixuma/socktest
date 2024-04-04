@@ -1,8 +1,11 @@
+// Cited from https://qiita.com/gu-chi/items/1e2ba4e19902f9e39b5e
+//  on 2024-04-05
+
 #include "Server.hpp"
 
 static void fatalError(const std::string message) {
-    perror(message.c_str());
-    exit(EXIT_FAILURE);
+	perror(message.c_str());
+	exit(EXIT_FAILURE);
 }
 
 Server::Server(unsigned short port) :

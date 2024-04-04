@@ -6,7 +6,7 @@
 #    By: Yoshihiro Kosaka <ykosaka@student.42tok    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 16:52:37 by ykosaka           #+#    #+#              #
-#    Updated: 2024/04/05 04:13:31 by Yoshihiro K      ###   ########.fr        #
+#    Updated: 2024/04/05 04:38:23 by Yoshihiro K      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ CXX			= c++
 RM			= rm
 
 # Command options (flags)
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -MMD -MP
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -pedantic-errors -MMD -MP
 DEBUGFLAGS	= -g -ggdb -fsanitize=address \
 			  -fstack-usage -fno-omit-frame-pointer
 INCLUDES	= -I$(INCDIR)
