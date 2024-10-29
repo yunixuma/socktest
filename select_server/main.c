@@ -26,7 +26,7 @@ fd_set		writefds;
 fd_set		currentfds;
 
 // flag to print
-int mode = 1;
+int mode = 0;
 
 void	ft_putstr(int fd, char *str)
 {
@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
 		if (select(maxfd + 1, &readfds, &writefds, NULL, NULL) == -1) // neither exceptfds nor timeout required
 			ft_err("select failed\n", mode);
 		else
-			ft_print("selected\n", 0);
+			ft_print("-selected\033[2G", mode);
 		for (int fd = 0; fd <= maxfd; fd++) // check for all descripters in use
 		{
 			if (FD_ISSET(fd, &readfds)) // check if the fd is available in readfds
