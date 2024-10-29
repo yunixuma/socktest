@@ -26,29 +26,38 @@ fd_set		writefds;
 fd_set		currentfds;
 
 // flag to print
-int mode = 0;
+int mode = 1;
 
 void	ft_putstr(int fd, char *str)
 {
 	write(fd, str, strlen(str));
 }
 
-int ft_err(char *msg, int mode)
+void	ft_err(char *msg, int mode)
 {
-	if (!msg || mode == 0)
+	if (!msg || !mode)
 		ft_putstr(2, "Fatal error\n");
 	else
 		ft_putstr(2, msg);
 	exit(1);
 }
 
+void	ft_print(char *msg, int mode)
+{
+	if (msg && mode)
+		ft_putstr(2, msg);
+}
+
 void	ft_broadcast(int sender)
 {
 	for (int fd = 0; fd <= maxfd; fd++)
 	{
-		if (FD_ISSET(fd, &writefds) && fd != sender) // check if the fd is available in writefds
+		if (FD_ISSET(fd, &writefds) && fd != sender) { // check if the fd is available in writefds
 			if (send(fd, buf_snd, strlen(buf_snd), 0) == -1)
-				ft_err("send failed", mode);
+				ft_err("sending failed\n", mode);
+			else
+				ft_print("msg sent\n", mode);
+		}
 	}
 }
 
@@ -67,7 +76,9 @@ int main(int argc, char *argv[])
 	// create and verify socket (this snippet is given by attachment)
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd == -1)
-		ft_err("socket failed", mode);
+		ft_err("socket failed\n", mode);
+	else
+		ft_print("socket created\n", mode);
 
 	// initialize descripter set
 	FD_ZERO(&currentfds); // clear currentfds
@@ -81,17 +92,23 @@ int main(int argc, char *argv[])
  
 	// bind newly created socket to given IP and verification (this snippet is given by attachment)
 	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
-		ft_err("bind failed", mode);
+		ft_err("bind failed\n", mode);
+	else
+		ft_print("binding..\n", mode);
     // listen for backlog number of clients (this snippet is given by attachment)
 	if (listen(sockfd, 100) != 0)
-		ft_err("listen failed", mode);
+		ft_err("listen failed\n", mode);
+	else
+		ft_print("listening..\n", mode);
 
     // server loop
 	while (1)
 	{
 		readfds = writefds = currentfds;
 		if (select(maxfd + 1, &readfds, &writefds, NULL, NULL) == -1) // neither exceptfds nor timeout required
-			ft_err("select failed", mode);
+			ft_err("select failed\n", mode);
+		else
+			ft_print("selected\n", 0);
 		for (int fd = 0; fd <= maxfd; fd++) // check for all descripters in use
 		{
 			if (FD_ISSET(fd, &readfds)) // check if the fd is available in readfds
@@ -101,7 +118,9 @@ int main(int argc, char *argv[])
 					bzero(&cliaddr, sizeof(cliaddr)); // clear cliaddr
 					connfd = accept(sockfd, (struct sockaddr *)&cliaddr, &addrlen); // given by attachment
 					if (connfd < 0)
-						ft_err("accept failed", mode);
+						ft_err("accept failed\n", mode);
+					else
+						ft_print("accepted\n", mode);
 					if (connfd > maxfd)
 						maxfd = connfd;
 					clients[connfd].id = maxid; // cluent id begins from 0
@@ -109,9 +128,7 @@ int main(int argc, char *argv[])
 					FD_SET(connfd, &currentfds); // add to currentfds
 					sprintf(buf_snd, "server: client %d just arrived\n", clients[connfd].id); // the format given by subject
 					ft_broadcast(connfd);
-				}
-				else // check if the client is sending msg
-				{
+				} else { // check if the client is sending msg
 					int ret = recv(fd, buf_rcv, 65520, 0); // receive msg from client
 					if (ret <= 0) // client disconnected
 					{

@@ -6,7 +6,7 @@
 #    By: ykosaka <ykosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 16:52:37 by ykosaka           #+#    #+#              #
-#    Updated: 2024/10/28 14:32:46 by ykosaka          ###   ########.fr        #
+#    Updated: 2024/10/29 18:06:23 by ykosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,10 @@ DEBUGFLAGS	= -g -ggdb -fsanitize=address \
 # INCLUDES	= -I$(INCDIR)
 RMFLAGS		= -r
 
+ifeq ($(MAKECMDGOALS),debug)
+	CFLAGS	+= $(DEBUGFLAGS)
+endif
+
 # ********************* Section for targets and commands ********************* #
 # Phonies
 .PHONY: all clean fclean re
@@ -46,6 +50,7 @@ clean:
 fclean: clean
 	-$(RM) $(RMFLAGS) $(NAME_SV) $(NAME_CL)
 re: fclean $(OBJDIR) all
+debug: all
 
 # Recipes
 $(NAME_SV):
