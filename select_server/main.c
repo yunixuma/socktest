@@ -11,8 +11,7 @@
 #include <arpa/inet.h>
 
 // global variables
-typedef struct s_client
-{
+typedef struct s_client {
 	int		id;
 	char	msg[65520];
 }	t_client;
@@ -28,13 +27,11 @@ fd_set		currentfds;
 // flag to print
 int mode = 0;
 
-void	ft_putstr(int fd, char *str)
-{
+void	ft_putstr(int fd, char *str) {
 	write(fd, str, strlen(str));
 }
 
-void	ft_err(char *msg, int mode)
-{
+void	ft_err(char *msg, int mode) {
 	if (!msg || !mode)
 		ft_putstr(2, "Fatal error\n");
 	else
@@ -42,16 +39,14 @@ void	ft_err(char *msg, int mode)
 	exit(1);
 }
 
-void	ft_print(char *msg, int mode)
-{
+void	ft_print(char *msg, int mode) {
 	if (msg && mode)
 		ft_putstr(2, msg);
 }
 
 void	ft_broadcast(int sender)
 {
-	for (int fd = 0; fd <= maxfd; fd++)
-	{
+	for (int fd = 0; fd <= maxfd; fd++) {
 		if (FD_ISSET(fd, &writefds) && fd != sender) { // check if the fd is available in writefds
 			if (send(fd, buf_snd, strlen(buf_snd), 0) == -1)
 				ft_err("sending failed\n", mode);
@@ -61,8 +56,7 @@ void	ft_broadcast(int sender)
 	}
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 	// verify arguments
 	if (argc != 2)
 		ft_err("Wrong number of arguments\n", 1);
@@ -109,12 +103,9 @@ int main(int argc, char *argv[])
 			ft_err("select failed\n", mode);
 		else
 			ft_print("-selected\033[2G", mode);
-		for (int fd = 0; fd <= maxfd; fd++) // check for all descripters in use
-		{
-			if (FD_ISSET(fd, &readfds)) // check if the fd is available in readfds
-			{
-				if (fd == sockfd) // check if new client is coming
-				{
+		for (int fd = 0; fd <= maxfd; fd++) { // check for all descripters in use
+			if (FD_ISSET(fd, &readfds)) { // check if the fd is available in readfds
+				if (fd == sockfd) { // check if new client is coming
 					bzero(&cliaddr, sizeof(cliaddr)); // clear cliaddr
 					connfd = accept(sockfd, (struct sockaddr *)&cliaddr, &addrlen); // given by attachment
 					if (connfd < 0)
@@ -130,20 +121,15 @@ int main(int argc, char *argv[])
 					ft_broadcast(connfd);
 				} else { // check if the client is sending msg
 					int ret = recv(fd, buf_rcv, 65520, 0); // receive msg from client
-					if (ret <= 0) // client disconnected
-					{
+					if (ret <= 0) { // client disconnected
 						sprintf(buf_snd, "server: client %d just left\n", clients[fd].id); // the format given by subject
 						ft_broadcast(fd);
 						FD_CLR(fd, &currentfds); // remove from currentfds
 						close(fd);
-					}
-					else
-					{
-						for (int i = 0, j = strlen(clients[fd].msg); i < ret; i++, j++) // split msg by '\n'
-						{
+					} else {
+						for (int i = 0, j = strlen(clients[fd].msg); i < ret; i++, j++) { // split msg by '\n'
 							clients[fd].msg[j] = buf_rcv[i];
-							if (clients[fd].msg[j] == '\n')
-							{
+							if (clients[fd].msg[j] == '\n') {
 								clients[fd].msg[j] = '\0';
 								sprintf(buf_snd, "client %d: %s\n", clients[fd].id, clients[fd].msg); // the format given by subject
 								ft_broadcast(fd);
