@@ -122,6 +122,10 @@ int main(int argc, char *argv[]) {
 				} else { // check if the client is sending msg
 					int ret = recv(fd, buf_rcv, 65520, 0); // receive msg from client
 					if (ret <= 0) { // client disconnected
+						if (ret == 0)
+							ft_print("client disconnected\n", mode);
+						else
+							ft_print("recv failed\n", mode);
 						sprintf(buf_snd, "server: client %d just left\n", clients[fd].id); // the format given by subject
 						ft_broadcast(fd);
 						FD_CLR(fd, &currentfds); // remove from currentfds
