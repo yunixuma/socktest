@@ -18,7 +18,7 @@ typedef struct s_client {
 t_client	clients[1024];
 char		buf_snd[65536];
 char		buf_rcv[65520]; // some bytes for msg header
-int			maxid = 0;
+int			maxid;
 int			maxfd = 0;
 fd_set		readfds;
 fd_set		writefds;
@@ -146,4 +146,5 @@ int main(int argc, char *argv[]) {
 			}
 		}
 	}
+	return (0);
 }
