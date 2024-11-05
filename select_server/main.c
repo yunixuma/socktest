@@ -13,11 +13,11 @@
 // global variables
 typedef struct s_client {
 	int		id;
-	char	msg[65520];
+	char	msg[20];
 }	t_client;
 t_client	clients[1024];
-char		buf_snd[65536];
-char		buf_rcv[65520]; // some bytes for msg header
+char		buf_snd[36];
+char		buf_rcv[20]; // some bytes for msg header
 int			maxid;
 int			maxfd = 0;
 fd_set		readfds;
@@ -120,7 +120,7 @@ int main(int argc, char *argv[]) {
 					sprintf(buf_snd, "server: client %d just arrived\n", clients[connfd].id); // the format given by subject
 					ft_broadcast(connfd);
 				} else { // check if the client is sending msg
-					int ret = recv(fd, buf_rcv, 65520, 0); // receive msg from client
+					int ret = recv(fd, buf_rcv, 20, 0); // receive msg from client
 					if (ret <= 0) { // client disconnected
 						if (ret == 0)
 							ft_print("client disconnected\n", mode);

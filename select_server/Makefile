@@ -6,7 +6,7 @@
 #    By: ykosaka <ykosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 16:52:37 by ykosaka           #+#    #+#              #
-#    Updated: 2024/10/29 18:06:23 by ykosaka          ###   ########.fr        #
+#    Updated: 2024/11/05 09:32:35 by ykosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ CC			= cc
 RM			= rm
 
 # Command options (flags)
-CFLAGS		= -Wall -Wextra -Werror -MMD -MP
+CFLAGS		= -Wall -Wextra -Werror
 DEBUGFLAGS	= -g -ggdb -fsanitize=address \
 			  -fstack-usage -fno-omit-frame-pointer
 # INCLUDES	= -I$(INCDIR)
@@ -45,9 +45,7 @@ endif
 
 # Mandatory targets
 all: $(LIBS) $(NAME_CL) $(NAME_SV)
-clean:
-	-$(RM) $(RMFLAGS) $(OBJDIR)
-fclean: clean
+fclean:
 	-$(RM) $(RMFLAGS) $(NAME_SV) $(NAME_CL)
 re: fclean $(OBJDIR) all
 debug: all
@@ -57,9 +55,9 @@ $(NAME_SV):
 	$(CC) -D MODE=1 $(CFLAGS) $(SRC_SV) $(LIBS) -o $(NAME_SV)
 # $(NAME_CL): $(OBJS_CL)
 #	 $(CXX) -D MODE=0 $(CFLAGS) $(SRC_CL) $(LIBS) -o $(NAME_CL)
-$(OBJDIR):
-	@mkdir -p $@
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
+# $(OBJDIR):
+# 	@mkdir -p $@
+# $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
+# 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 # ******** ******** ******** ******** **** ******** ******** ******** ******** #
