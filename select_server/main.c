@@ -13,11 +13,11 @@
 // global variables
 typedef struct s_client {
 	int		id;
-	char	msg[20];
+	char	msg[21]; // some bytes for msg header
 }	t_client;
 t_client	clients[1024];
 char		buf_snd[36];
-char		buf_rcv[20]; // some bytes for msg header
+char		buf_rcv[20];
 int			maxid;
 int			maxfd = 0;
 fd_set		readfds;
@@ -25,7 +25,7 @@ fd_set		writefds;
 fd_set		currentfds;
 
 // flag to print
-int mode = 0;
+int mode = 1;
 
 void	ft_putstr(int fd, char *str) {
 	write(fd, str, strlen(str));
@@ -66,6 +66,8 @@ int main(int argc, char *argv[]) {
 	struct sockaddr_in servaddr, cliaddr;
 	bzero(&servaddr, sizeof(servaddr));
 	socklen_t addrlen = sizeof(cliaddr);
+	char	terminator;
+	int		is_begin = 1;
 
 	// create and verify socket (this snippet is given by attachment)
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -133,11 +135,25 @@ int main(int argc, char *argv[]) {
 					} else {
 						for (int i = 0, j = strlen(clients[fd].msg); i < ret; i++, j++) { // split msg by '\n'
 							clients[fd].msg[j] = buf_rcv[i];
-							if (clients[fd].msg[j] == '\n') {
-								clients[fd].msg[j] = '\0';
-								sprintf(buf_snd, "client %d: %s\n", clients[fd].id, clients[fd].msg); // the format given by subject
+							if (clients[fd].msg[j] == '\n' || j == 19) { // if the msg is full or '\n' is found
+								if (clients[fd].msg[j] == '\n') {
+									clients[fd].msg[j] = '\0';
+									terminator = '\n';
+								} else { // if '\n' is found
+									clients[fd].msg[20] = '\0';
+									sprintf(buf_snd, "%s", clients[fd].msg);
+									terminator = '\0';
+								}
+								if (is_begin)
+									sprintf(buf_snd, "client %d: %s%c", clients[fd].id, clients[fd].msg, terminator);
+								else
+									sprintf(buf_snd, "%s%c", clients[fd].msg, terminator);
 								ft_broadcast(fd);
 								bzero(clients[fd].msg, strlen(clients[fd].msg)); // clear the buffer
+								if (terminator == '\n')
+									is_begin = 1;
+								else
+									is_begin = 0;
 								j = -1;
 							}
 						}
