@@ -44,8 +44,7 @@ void	ft_print(char *msg, int mode) {
 		ft_putstr(2, msg);
 }
 
-void	ft_broadcast(int sender)
-{
+void	ft_broadcast(int sender) {
 	for (int fd = 0; fd <= maxfd; fd++) {
 		if (FD_ISSET(fd, &writefds) && fd != sender) { // check if the fd is available in writefds
 			if (send(fd, buf_snd, strlen(buf_snd), 0) == -1)
@@ -98,8 +97,7 @@ int main(int argc, char *argv[]) {
 		ft_print("listening..\n", mode);
 
     // server loop
-	while (1)
-	{
+	while (1) {
 		readfds = writefds = currentfds;
 		if (select(maxfd + 1, &readfds, &writefds, NULL, NULL) == -1) // neither exceptfds nor timeout required
 			ft_err("select failed\n", mode);
